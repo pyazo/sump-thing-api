@@ -1,16 +1,9 @@
-FROM microsoft/dotnet:sdk AS build-env
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2 
+
 WORKDIR /app
 
-# Copy csproj and restore as distinct layers
-COPY ./SumpThingApi/*.csproj ./
+COPY ./SumpThingApi /app
+
 RUN dotnet restore
 
-# Copy everything else and build
-COPY ./SumpThingApi/ ./
-RUN dotnet publish -c Release -o out
-
-# Build runtime image
-FROM microsoft/dotnet:aspnetcore-runtime
-WORKDIR /app
-COPY --from=build-env /app/out .
-ENTRYPOINT ["dotnet", "SumpThingApi.dll"]
+ENTRYPOINT dotnet watch run --urls=http://+:5000

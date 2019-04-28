@@ -2,14 +2,16 @@ version: '3.4'
 
 services:
   sump-thing-api:
-    image: sump-thing/api:latest
+    image: sump-thing/api
     depends_on:
       - db
     build:
       context: .
       dockerfile: Dockerfile
+    volumes:
+      - ./SumpThingApi:/app
     ports:
-      - "4000:80"
+      - "4000:5000"
     environment:
       DB_CONNECTION_STRING: "host=db;port=5432;database=postgres;username=postgres;password=postgres;"
     networks:
@@ -17,11 +19,11 @@ services:
   db:
     image: postgres:latest
     ports:
-      - "5432"
+      - "5432:5432"
     restart: always
     volumes:
       - data:/var/lib/postgresql/data
-      - ./dbscripts/seed.sql:/docker-entrypoint-initdb.d/seed.sql
+      - ./db_scripts/seed.sql:/docker-entrypoint-initdb.d/seed.sql
     environment:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "postgres"
