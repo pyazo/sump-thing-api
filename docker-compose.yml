@@ -11,7 +11,7 @@ services:
     volumes:
       - ./SumpThingApi:/app
     ports:
-      - "4000:5000"
+      - "5000:5000"
     environment:
       DB_CONNECTION_STRING: "host=db;port=5432;database=postgres;username=postgres;password=postgres;"
       AUTH0_DOMAIN: "sump-thing-dev.auth0.com"
