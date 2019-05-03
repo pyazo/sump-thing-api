@@ -2,6 +2,7 @@ using SumpThingApi.Models;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 using System.Text.Encodings.Web;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace SumpThingApi.Controllers {
     }
 
     [HttpGet("{id}")]
+    [Authorize]
     public object Get(int id) {
       return db.Users
         .Where(u => u.Id == id)
