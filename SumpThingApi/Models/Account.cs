@@ -6,5 +6,6 @@ namespace SumpThingApi.Models {
     public string ResourceType { get; set; }
     public int ResourceId { get; set; }
     public List<UserAccount> UserAccounts { get; set; } = new List<UserAccount>();
+    public List<Tank> Tanks { get; set; } = new List<Tank>();
   }
 }

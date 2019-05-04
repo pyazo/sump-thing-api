@@ -29,7 +29,23 @@ namespace SumpThingApi.Controllers {
           LastName = u.LastName,
           Email = u.Email,
           PhoneNumber = u.PhoneNumber,
-          UserAccounts = u.UserAccounts.Select(ua => ua.Account).Select(a => new { Id = a.Id, ResourceType = a.ResourceType, ResourceId = a.ResourceId })
+          UserAccounts = u.UserAccounts
+            .Select(ua => ua.Account)
+            .Select(a => new {
+              Id = a.Id,
+              ResourceType = a.ResourceType,
+              ResourceId = a.ResourceId,
+              Tanks = a.Tanks.Select(t => new {
+                Id = t.Id,
+                Name = t.Name,
+                WaterType = t.WaterType,
+                TankType = t.TankType,
+                Volume = t.Volume,
+                VolumeUnit = t.VolumeUnit,
+                IsSystem = t.IsSystem,
+                NumberOfTanks = t.NumberOfTanks
+              })
+            })
         })
         .ToList();
     }
@@ -46,7 +62,23 @@ namespace SumpThingApi.Controllers {
           LastName = u.LastName,
           Email = u.Email,
           PhoneNumber = u.PhoneNumber,
-          UserAccounts = u.UserAccounts.Select(ua => ua.Account).Select(a => new { Id = a.Id, ResourceType = a.ResourceType, ResourceId = a.ResourceId })
+          UserAccounts = u.UserAccounts
+            .Select(ua => ua.Account)
+            .Select(a => new {
+              Id = a.Id,
+              ResourceType = a.ResourceType,
+              ResourceId = a.ResourceId,
+              Tanks = a.Tanks.Select(t => new {
+                Id = t.Id,
+                Name = t.Name,
+                WaterType = t.WaterType,
+                TankType = t.TankType,
+                Volume = t.Volume,
+                VolumeUnit = t.VolumeUnit,
+                IsSystem = t.IsSystem,
+                NumberOfTanks = t.NumberOfTanks
+              })
+            })
         })
         .ToList();
     }

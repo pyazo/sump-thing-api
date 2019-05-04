@@ -18,6 +18,7 @@ namespace SumpThingApi.Models {
       new UserMap(modelBuilder.Entity<User>());
       new AccountMap(modelBuilder.Entity<Account>());
       new UserAccountMap(modelBuilder.Entity<UserAccount>());
+      new TankMap(modelBuilder.Entity<Tank>());
 
       modelBuilder.Entity<UserAccount>()
         .HasKey(ua => new { ua.AccountId, ua.UserId });
@@ -31,6 +32,14 @@ namespace SumpThingApi.Models {
         .HasOne(ua => ua.Account)
         .WithMany(a => a.UserAccounts)
         .HasForeignKey(ua => ua.AccountId);
+
+      modelBuilder.Entity<Tank>()
+        .HasKey(t => new { t.AccountId });
+      
+      modelBuilder.Entity<Tank>()
+        .HasOne(t => t.Account)
+        .WithMany(a => a.Tanks)
+        .HasForeignKey(t => t.AccountId);
     }
   }
 }
