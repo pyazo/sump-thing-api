@@ -15,16 +15,12 @@ namespace SumpThingApi.Models {
   }
 
   public class WaterType {
-    private WaterType(string value) { Value = value; }
-    public string Value { get; set; }
-    public static WaterType Salt { get { return new WaterType("salt"); } }
-    public static WaterType Fresh { get { return new WaterType("fresh"); } }
+    public static string Salt => "salt";
+    public static string Fresh => "fresh";
   }
 
   public class VolumeType {
-    private VolumeType(string value) { Value = value; }
-    public string Value { get; set; }
-    public static VolumeType Liters { get { return new VolumeType("L"); } }
-    public static VolumeType Gallons { get { return new VolumeType("G"); } }
+    public static string Liters => "L";
+    public static string Gallons => "G";
   }
 }

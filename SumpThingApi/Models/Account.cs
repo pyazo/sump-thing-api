@@ -10,9 +10,7 @@ namespace SumpThingApi.Models {
   }
 
   public class ResourceType {
-    private ResourceType(string value) { Value = value; }
-    public string Value { get; set; }
-    public static ResourceType User { get { return new ResourceType("user"); } }
-    public static ResourceType Company { get { return new ResourceType("company"); } }
+    public static string User => "user";
+    public static string Company => "company";
   }
 }
