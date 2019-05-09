@@ -98,3 +98,33 @@ values
   1,
   1
 );
+
+create table parameters
+(
+  id serial primary key,
+  name varchar(50),
+  unit varchar(50),
+  max integer,
+  min integer,
+  change_warning_inverval integer,
+  tank_id integer references tanks(id)
+);
+
+insert into parameters
+(
+  name,
+  unit,
+  max,
+  min,
+  change_warning_inverval,
+  tank_id
+)
+values
+(
+  'Temperature',
+  'F',
+  82,
+  75,
+  5,
+  1
+)
