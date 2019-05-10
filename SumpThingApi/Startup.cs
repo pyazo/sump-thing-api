@@ -1,4 +1,5 @@
 ﻿using SumpThingApi.Models;
+using SumpThingApi.Clients;
 
 using System;
 using System.Collections.Generic;
@@ -48,6 +49,10 @@ namespace SumpThingApi
                 options.Authority = domain;
                 options.Audience = Environment.GetEnvironmentVariable("AUTH0_API_ID");
             });
+
+            services.AddHttpClient();
+
+            services.AddHttpClient<Auth0Client>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

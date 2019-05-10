@@ -6,7 +6,7 @@ namespace SumpThingApi.Models {
     public int Id { get; set; }
     public int Value { get; set; }
     public string Notes { get; set; }
-    public int ParemeterId { get; set; }
+    public int ParameterId { get; set; }
     public Parameter Parameter { get; set; }
     public DateTime UpdatedAt { get; set; }
     public DateTime CreatedAt { get; set; }

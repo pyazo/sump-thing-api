@@ -16,6 +16,8 @@ services:
       DB_CONNECTION_STRING: "host=db;port=5432;database=postgres;username=postgres;password=postgres;"
       AUTH0_DOMAIN: "sump-thing-dev.auth0.com"
       AUTH0_API_ID: "https://qa.sump-thing.com"
+      AUTH0_CLIENT_ID: "2x0Is1u5E9NlNybZzhva0wpYA2WY6Gcl"
+      AUTH0_CLIENT_SECRET: "PRyOdfGfFLlJBI9AyqyRCXVqzoDz2gZ28nmJXMRHjNAdY9Pr2amIXka_H-Himdwh"
     networks:
       - sump-thing-backend
   db:

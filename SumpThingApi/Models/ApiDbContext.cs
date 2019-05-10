@@ -19,6 +19,8 @@ namespace SumpThingApi.Models {
       new AccountMap(modelBuilder.Entity<Account>());
       new UserAccountMap(modelBuilder.Entity<UserAccount>());
       new TankMap(modelBuilder.Entity<Tank>());
+      new ParameterMap(modelBuilder.Entity<Parameter>());
+      new ParameterValueMap(modelBuilder.Entity<ParameterValue>());
 
       modelBuilder.Entity<UserAccount>()
         .HasKey(ua => new { ua.AccountId, ua.UserId });
