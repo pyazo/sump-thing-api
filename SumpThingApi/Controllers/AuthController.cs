@@ -15,19 +15,21 @@ using Newtonsoft.Json.Linq;
 namespace SumpThingApi.Controllers {
   [Route("/api/login")]
   [ApiController]
-  public class LoginController : ControllerBase {
-    private Auth0Client _client;
+  public class AuthController : ControllerBase {
+    private readonly Auth0Client _client;
 
-    public LoginController(Auth0Client client) {
+    public AuthController(Auth0Client client) {
       _client = client;
     }
 
     [HttpPost]
-    public async Task<string> Post([FromBody] JObject data) {
+    public async Task<JObject> Post([FromBody] JObject data) {
       string username = data["username"].ToString();
       string password = data["password"].ToString();
 
-      var resp = await _client.Login(username, password);
+      JObject resp = await _client.Login(username, password);
+
+      this.Response.Headers.Add("Content-Type", "application/json");
 
       return resp;
     }

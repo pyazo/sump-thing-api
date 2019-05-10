@@ -2,6 +2,8 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
+using Newtonsoft.Json.Linq;
+
 namespace SumpThingApi.Clients {
   public class Auth0Client {
   public HttpClient Client { get; private set; }
@@ -13,7 +15,7 @@ namespace SumpThingApi.Clients {
     Client = client;
   }
 
-  public async Task<string> Login(String username, String password) {
+  public async Task<JObject> Login(String username, String password) {
     var options = new {
       scope = "openid read:current_user profile",
       audience = Environment.GetEnvironmentVariable("AUTH0_API_ID"),
@@ -24,9 +26,11 @@ namespace SumpThingApi.Clients {
       client_secret = Environment.GetEnvironmentVariable("AUTH0_CLIENT_SECRET")
     };
 
-    var response = await Client.PostAsJsonAsync("", options);
+    HttpResponseMessage response = await Client.PostAsJsonAsync("", options);
 
-    var json = await response.Content.ReadAsStringAsync();
+    string resp = await response.Content.ReadAsStringAsync();
+
+    JObject json = JObject.Parse(resp);
 
     return json;
   }
