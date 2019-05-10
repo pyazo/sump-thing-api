@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace SumpThingApi.Models {
-  public class ParameterValue {
+namespace SumpThingApi.Models
+{
+  public class ParameterValue
+  {
     public int Id { get; set; }
     public int Value { get; set; }
     public string Notes { get; set; }
