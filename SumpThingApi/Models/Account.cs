@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace SumpThingApi.Models {
@@ -7,6 +8,8 @@ namespace SumpThingApi.Models {
     public int ResourceId { get; set; }
     public List<UserAccount> UserAccounts { get; set; } = new List<UserAccount>();
     public List<Tank> Tanks { get; set; } = new List<Tank>();
+    public DateTime UpdatedAt { get; set; }
+    public DateTime CreatedAt { get; set; }
   }
 
   public class ResourceType {

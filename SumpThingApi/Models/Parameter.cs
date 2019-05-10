@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace SumpThingApi.Models {
@@ -11,5 +12,8 @@ namespace SumpThingApi.Models {
     public int TankId { get; set; }
     public Tank Tank { get; set; }
     public int SumpThingBoxId { get; set; }
+    public List<ParameterValue> Values { get; set; } =  new List<ParameterValue>();
+    public DateTime UpdatedAt { get; set; }
+    public DateTime CreatedAt { get; set; }
   }
 }

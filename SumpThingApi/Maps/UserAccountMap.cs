@@ -12,6 +12,8 @@ namespace SumpThingApi.Maps {
       e.Property(x => x.Id).HasColumnName("id");
       e.Property(x => x.UserId).HasColumnName("user_id");
       e.Property(x => x.AccountId).HasColumnName("account_id");
+      e.Property(x => x.UpdatedAt).HasColumnName("updated_at");
+      e.Property(x => x.CreatedAt).HasColumnName("created_at");
     }
   }
 }

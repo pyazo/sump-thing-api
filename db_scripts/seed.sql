@@ -1,5 +1,17 @@
 \connect postgres
 
+CREATE OR REPLACE FUNCTION update_timestamp()
+RETURNS TRIGGER AS $$
+BEGIN
+   IF row(NEW.*) IS DISTINCT FROM row(OLD.*) THEN
+      NEW.updated_at = now(); 
+      RETURN NEW;
+   ELSE
+      RETURN OLD;
+   END IF;
+END;
+$$ language 'plpgsql';
+
 create table users
 (
   id serial primary key,
@@ -7,8 +19,15 @@ create table users
   first_name varchar(50),
   last_name varchar(50),
   email varchar(255),
-  phone_number varchar(15)
+  phone_number varchar(15),
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
 );
+
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON users
+FOR EACH ROW
+EXECUTE PROCEDURE update_timestamp();
 
 insert into users
 (
@@ -31,8 +50,15 @@ create table accounts
 (
   id serial primary key,
   resource_type varchar(50),
-  resource_id integer
+  resource_id integer,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
 );
+
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON accounts
+FOR EACH ROW
+EXECUTE PROCEDURE update_timestamp();
 
 insert into accounts
 (
@@ -49,8 +75,16 @@ create table user_accounts
 (
   id serial primary key,
   user_id integer references users(id),
-  account_id integer references accounts(id)
+  account_id integer references accounts(id),
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
 );
+
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON user_accounts
+FOR EACH ROW
+EXECUTE PROCEDURE update_timestamp();
+
 
 insert into user_accounts
 (
@@ -73,8 +107,15 @@ create table tanks
   volume_unit varchar(2),
   is_system boolean,
   number_of_tanks integer,
-  account_id integer references accounts(id)
+  account_id integer references accounts(id),
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
 );
+
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON tanks
+FOR EACH ROW
+EXECUTE PROCEDURE update_timestamp();
 
 insert into tanks
 (
@@ -107,8 +148,15 @@ create table parameters
   max integer,
   min integer,
   change_warning_inverval integer,
-  tank_id integer references tanks(id)
+  tank_id integer references tanks(id),
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
 );
+
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON parameters
+FOR EACH ROW
+EXECUTE PROCEDURE update_timestamp();
 
 insert into parameters
 (
@@ -126,5 +174,33 @@ values
   82,
   75,
   5,
+  1
+);
+
+create table parameter_values
+(
+  id serial primary key,
+  value integer,
+  notes varchar,
+  parameter_id integer references parameters(id),
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON parameter_values
+FOR EACH ROW
+EXECUTE PROCEDURE update_timestamp();
+
+insert into parameter_values
+(
+  value,
+  notes,
+  parameter_id
+)
+values
+(
+  81,
+  'The tank is getting a little hot',
   1
 )

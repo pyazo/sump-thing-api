@@ -15,6 +15,8 @@ namespace SumpThingApi.Maps {
       e.Property(x => x.Auth0Token).HasColumnName("auth0_token");
       e.Property(x => x.Email).HasColumnName("email");
       e.Property(x => x.PhoneNumber).HasColumnName("phone_number");
+      e.Property(x => x.UpdatedAt).HasColumnName("updated_at");
+      e.Property(x => x.CreatedAt).HasColumnName("created_at");
     }
   }
 }

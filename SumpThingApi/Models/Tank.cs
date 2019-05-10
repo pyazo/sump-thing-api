@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace SumpThingApi.Models {
@@ -12,6 +13,9 @@ namespace SumpThingApi.Models {
     public int NumberOfTanks { get; set; }
     public int AccountId { get; set; }
     public Account Account { get; set; }
+    public List<Parameter> Parameters { get; set; } = new List<Parameter>();
+    public DateTime UpdatedAt { get; set; }
+    public DateTime CreatedAt { get; set; }
   }
 
   public class WaterType {

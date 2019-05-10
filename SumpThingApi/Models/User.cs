@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace SumpThingApi.Models {
@@ -8,6 +9,8 @@ namespace SumpThingApi.Models {
     public string LastName { get; set; }
     public string Email { get; set; }
     public string PhoneNumber { get; set; }
-    public virtual IEnumerable<UserAccount> UserAccounts { get; set; }
+    public virtual List<UserAccount> UserAccounts { get; set; } = new List<UserAccount>();
+    public DateTime UpdatedAt { get; set; }
+    public DateTime CreatedAt { get; set; }
   }
 }
