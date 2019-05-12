@@ -28,6 +28,7 @@ services:
     volumes:
       - data:/var/lib/postgresql/data
       - ./db_scripts/seed.sql:/docker-entrypoint-initdb.d/seed.sql
+      - ./db_scripts/models:/app/db/models
     environment:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "postgres"

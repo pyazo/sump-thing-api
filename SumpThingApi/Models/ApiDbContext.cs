@@ -23,6 +23,8 @@ namespace SumpThingApi.Models
       new TankMap (modelBuilder.Entity<Tank> ());
       new ParameterMap (modelBuilder.Entity<Parameter> ());
       new ParameterValueMap (modelBuilder.Entity<ParameterValue> ());
+      new SumpThingBoxMap (modelBuilder.Entity<SumpThingBox> ());
+      new RegistrationMap (modelBuilder.Entity<Registration> ());
 
       modelBuilder.Entity<UserAccount> ()
         .HasKey (ua => new { ua.AccountId, ua.UserId });
