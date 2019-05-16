@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace SumpThingApi.Models
 {
+  [JsonObject (NamingStrategyType = typeof (SnakeCaseNamingStrategy))]
   public class Account
   {
     public int Id { get; set; }

@@ -22,12 +22,12 @@ namespace SumpThingApi.Controllers
     public object Get ()
     {
       return db.Users
-        .Include(u => u.UserAccounts)
-        .ThenInclude(ua => ua.Account)
-        .ThenInclude(a => a.Tanks)
-        .ThenInclude(t => t.Parameters)
-        .ThenInclude(p => p.Values)
-        .ToList();
+        .Include (u => u.UserAccounts)
+        .ThenInclude (ua => ua.Account)
+        .ThenInclude (a => a.Tanks)
+        .ThenInclude (t => t.Parameters)
+        .ThenInclude (p => p.Values)
+        .ToList ();
     }
 
     [HttpGet ("{id}")]
@@ -36,10 +36,10 @@ namespace SumpThingApi.Controllers
     {
       return db.Users
         .Where (u => u.Id == id)
-        .Include(u => u.UserAccounts)
-        .ThenInclude(ua => ua.Account)
-        .ThenInclude(a => a.Tanks)
-        .ToList();
+        .Include (u => u.UserAccounts)
+        .ThenInclude (ua => ua.Account)
+        .ThenInclude (a => a.Tanks)
+        .ToList ();
     }
   }
 }
