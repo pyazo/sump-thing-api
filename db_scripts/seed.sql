@@ -30,7 +30,7 @@ $$ language 'plpgsql';
 \i /app/db/models/accounts.sql
 \i /app/db/models/user_accounts.sql
 \i /app/db/models/tanks.sql
+\i /app/db/models/sump_thing_boxes.sql
 \i /app/db/models/parameters.sql
 \i /app/db/models/parameter_values.sql
-\i /app/db/models/sump_thing_boxes.sql
 \i /app/db/models/registrations.sql

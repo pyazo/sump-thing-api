@@ -9,7 +9,7 @@ namespace SumpThingApi.Models
     public Account Account { get; set; }
     public int SumpThingBoxId { get; set; }
     public SumpThingBox SumpThingBox { get; set; }
-    public DateTime CreatedAt { get; }
-    public DateTime UpdatedAt { get; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
   }
 }

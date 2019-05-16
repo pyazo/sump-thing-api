@@ -11,6 +11,7 @@ namespace SumpThingApi.Maps
       e.HasKey (x => x.Id);
       e.ToTable ("parameter_values");
 
+      e.Property (x => x.Id).HasColumnName ("id");
       e.Property (x => x.Value).HasColumnName ("value");
       e.Property (x => x.Notes).HasColumnName ("notes");
       e.Property (x => x.ParameterId).HasColumnName ("parameter_id");

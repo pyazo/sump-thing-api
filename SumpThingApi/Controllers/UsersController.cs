@@ -22,35 +22,12 @@ namespace SumpThingApi.Controllers
     public object Get ()
     {
       return db.Users
-        .Select (u => new
-        {
-          Id = u.Id,
-            Auth0Token = u.Auth0Token,
-            FirstName = u.FirstName,
-            LastName = u.LastName,
-            Email = u.Email,
-            PhoneNumber = u.PhoneNumber,
-            UserAccounts = u.UserAccounts
-            .Select (ua => ua.Account)
-            .Select (a => new
-            {
-              Id = a.Id,
-                ResourceType = a.ResourceType,
-                ResourceId = a.ResourceId,
-                Tanks = a.Tanks.Select (t => new
-                {
-                  Id = t.Id,
-                    Name = t.Name,
-                    WaterType = t.WaterType,
-                    TankType = t.TankType,
-                    Volume = t.Volume,
-                    VolumeUnit = t.VolumeUnit,
-                    IsSystem = t.IsSystem,
-                    NumberOfTanks = t.NumberOfTanks
-                })
-            })
-        })
-        .ToList ();
+        .Include(u => u.UserAccounts)
+        .ThenInclude(ua => ua.Account)
+        .ThenInclude(a => a.Tanks)
+        .ThenInclude(t => t.Parameters)
+        .ThenInclude(p => p.Values)
+        .ToList();
     }
 
     [HttpGet ("{id}")]
@@ -59,35 +36,10 @@ namespace SumpThingApi.Controllers
     {
       return db.Users
         .Where (u => u.Id == id)
-        .Select (u => new
-        {
-          Id = u.Id,
-            Auth0Token = u.Auth0Token,
-            FirstName = u.FirstName,
-            LastName = u.LastName,
-            Email = u.Email,
-            PhoneNumber = u.PhoneNumber,
-            UserAccounts = u.UserAccounts
-            .Select (ua => ua.Account)
-            .Select (a => new
-            {
-              Id = a.Id,
-                ResourceType = a.ResourceType,
-                ResourceId = a.ResourceId,
-                Tanks = a.Tanks.Select (t => new
-                {
-                  Id = t.Id,
-                    Name = t.Name,
-                    WaterType = t.WaterType,
-                    TankType = t.TankType,
-                    Volume = t.Volume,
-                    VolumeUnit = t.VolumeUnit,
-                    IsSystem = t.IsSystem,
-                    NumberOfTanks = t.NumberOfTanks
-                })
-            })
-        })
-        .ToList ();
+        .Include(u => u.UserAccounts)
+        .ThenInclude(ua => ua.Account)
+        .ThenInclude(a => a.Tanks)
+        .ToList();
     }
   }
 }
