@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -46,6 +46,15 @@ namespace SumpThingApi
           };
         });
 
+      services.AddCors (options =>
+      {
+        options.AddPolicy ("AllowLocalFrontend", builder =>
+        {
+          builder.WithOrigins ("http://localhost:8080")
+            .AllowAnyHeader ();
+        });
+      });
+
       // Get database stuff setup.
       var connectionString = Environment.GetEnvironmentVariable ("DB_CONNECTION_STRING");
 
@@ -75,6 +84,7 @@ namespace SumpThingApi
       if (env.IsDevelopment ())
       {
         app.UseDeveloperExceptionPage ();
+        app.UseCors ("AllowLocalFrontend");
       }
       else
       {
