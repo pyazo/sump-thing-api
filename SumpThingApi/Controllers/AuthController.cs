@@ -10,7 +10,6 @@ using SumpThingApi.Clients;
 
 namespace SumpThingApi.Controllers
 {
-  [Route ("/api/login")]
   [ApiController]
   public class AuthController : ControllerBase
   {
@@ -21,8 +20,15 @@ namespace SumpThingApi.Controllers
       _client = client;
     }
 
-    [HttpPost]
-    public async Task<JObject> Post ([FromBody] JObject data)
+    [HttpGet("/api/validate_token")]
+    [Authorize]
+    public string ValidateToken()
+    {
+      return "Token valid.";
+    }
+
+    [HttpPost("/api/login")]
+    public async Task<JObject> Login ([FromBody] JObject data)
     {
       string username = data["username"].ToString ();
       string password = data["password"].ToString ();
