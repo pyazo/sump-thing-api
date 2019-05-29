@@ -30,6 +30,20 @@ namespace SumpThingApi.Controllers
         .ToList ();
     }
 
+    [HttpGet ("me")]
+    [Authorize]
+    public object GetMe ()
+    {
+      string auth0Token = User.FindFirst("sub")?.Value;
+
+      return db.Users
+        .Where (u => u.Auth0Token == auth0Token)
+        .Include (u => u.UserAccounts)
+        .ThenInclude (ua => ua.Account)
+        .ThenInclude (a => a.Tanks)
+        .ToList ();
+    }
+
     [HttpGet ("{id}")]
     [Authorize]
     public object Get (int id)

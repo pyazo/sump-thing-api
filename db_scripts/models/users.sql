@@ -25,7 +25,7 @@ insert into users
 )
 values
 (
-  'auth0|5cc5ba36613fb90e0f1d0bf6',
+  'auth0|5cd4dc0dfc8d3910c9527924',
   'Test',
   'User',
   'test@test.test',

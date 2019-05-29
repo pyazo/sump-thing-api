@@ -1,7 +1,9 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IdentityModel.Tokens.Jwt;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,8 +14,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+
 using SumpThingApi.Clients;
 using SumpThingApi.Models;
 
@@ -59,6 +63,8 @@ namespace SumpThingApi
       var connectionString = Environment.GetEnvironmentVariable ("DB_CONNECTION_STRING");
 
       services.AddDbContext<ApiDbContext> (options => options.UseNpgsql (connectionString));
+
+      JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
       // Setup Auth0 Stuff
       string domain = $"https://{Environment.GetEnvironmentVariable("AUTH0_DOMAIN")}/";
