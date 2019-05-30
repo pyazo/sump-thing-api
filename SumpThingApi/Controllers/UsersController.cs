@@ -37,8 +37,7 @@ namespace SumpThingApi.Controllers
       string auth0Token = User.FindFirst("sub")?.Value;
 
       return db.Users
-        .Where (u => u.Auth0Token == auth0Token)
-        .ToList ();
+        .Where (u => u.Auth0Token == auth0Token);
     }
 
     [HttpGet ("{id}")]
