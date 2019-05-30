@@ -38,9 +38,6 @@ namespace SumpThingApi.Controllers
 
       return db.Users
         .Where (u => u.Auth0Token == auth0Token)
-        .Include (u => u.UserAccounts)
-        .ThenInclude (ua => ua.Account)
-        .ThenInclude (a => a.Tanks)
         .ToList ();
     }
 
