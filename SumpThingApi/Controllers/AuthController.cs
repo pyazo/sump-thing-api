@@ -44,8 +44,8 @@ namespace SumpThingApi.Controllers
     [HttpPost("/api/signup")]
     public async Task<object> Signup ([FromBody] JObject data)
     {
-      string first_name = data["first_name"].ToString ();
-      string last_name = data["last_name"].ToString ();
+      string first_name = data["firstName"].ToString ();
+      string last_name = data["lastName"].ToString ();
       string email = data["email"].ToString ();
       string password = data["password"].ToString ();
 
@@ -53,10 +53,10 @@ namespace SumpThingApi.Controllers
 
       this.Response.Headers.Add("Content-Type", "application/json");
 
-      int statusCode = resp["statusCode"].ToObject<int> ();
+      int? statusCode = resp["statusCode"]?.ToObject<int> ();
 
       if (statusCode >= 400) {
-        this.HttpContext.Response.StatusCode = statusCode;
+        this.HttpContext.Response.StatusCode = (int) statusCode;
 
         return resp;
       }
