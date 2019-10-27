@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -52,6 +53,14 @@ namespace SumpThingApi.Controllers
       JObject resp = await _client.Register(first_name, last_name, email, password);
 
       this.Response.Headers.Add("Content-Type", "application/json");
+
+      int statusCode = resp["statusCode"].ToObject<int> ();
+
+      if (statusCode >= 400) {
+        this.HttpContext.Response.StatusCode = statusCode;
+
+        return resp;
+      }
 
       User user = new User{
         Auth0Token = $"auth0|{resp["_id"].ToString ()}",
