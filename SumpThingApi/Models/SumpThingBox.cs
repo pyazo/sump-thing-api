@@ -1,9 +1,13 @@
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SumpThingApi.Models
 {
   public class SumpThingBox
   {
+    [Key]
+    [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
     public int TankId { get; set; }
     public Tank Tank { get; set; }

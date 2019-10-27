@@ -1,10 +1,13 @@
 using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SumpThingApi.Models
 {
   public class ParameterValue
   {
+    [Key]
+    [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
     public int Value { get; set; }
     public string Notes { get; set; }

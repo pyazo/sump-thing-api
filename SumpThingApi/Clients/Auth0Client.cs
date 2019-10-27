@@ -11,7 +11,6 @@ namespace SumpThingApi.Clients
 
     public Auth0Client (HttpClient client)
     {
-      client.BaseAddress = new Uri ($"https://{Environment.GetEnvironmentVariable("AUTH0_DOMAIN")}/oauth/token/");
       client.DefaultRequestHeaders.TryAddWithoutValidation ("Content-Type", "application/json");
 
       Client = client;
@@ -19,6 +18,8 @@ namespace SumpThingApi.Clients
 
     public async Task<JObject> Login (String username, String password)
     {
+      Client.BaseAddress = new Uri ($"https://{Environment.GetEnvironmentVariable("AUTH0_DOMAIN")}/oauth/token/");
+
       var options = new
       {
         scope = "openid read:current_user profile",
@@ -31,6 +32,28 @@ namespace SumpThingApi.Clients
       };
 
       HttpResponseMessage response = await Client.PostAsJsonAsync ("", options);
+
+      string resp = await response.Content.ReadAsStringAsync ();
+
+      JObject json = JObject.Parse (resp);
+
+      return json;
+    }
+
+    public async Task<JObject> Register (string first_name, string last_name, string email, string password)
+    {
+      Client.BaseAddress = new Uri ($"https://{Environment.GetEnvironmentVariable("AUTH0_DOMAIN")}/dbconnections/signup/");
+
+            var options = new
+      {
+        email = email,
+        password = password,
+        name = $"{first_name} {last_name}",
+        connection = "Username-Password-Authentication",
+        client_id = Environment.GetEnvironmentVariable ("AUTH0_CLIENT_ID"),
+      };
+
+      HttpResponseMessage response = await Client.PostAsJsonAsync("", options);
 
       string resp = await response.Content.ReadAsStringAsync ();
 
