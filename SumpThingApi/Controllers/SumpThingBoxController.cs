@@ -31,6 +31,16 @@ namespace SumpThingApi.Controllers
           .Include(u => u.UserAccounts)
           .ThenInclude(ua => ua.Account)
           .Single ();
+        
+        int count = db.SumpThingBoxes
+          .Where(s => s.UUID == uuid)
+          .Count();
+
+        if (count > 0) {
+          this.Response.StatusCode = 400;
+
+          return "Device already registered.";
+        }
 
         SumpThingBox sumpThingBox = new SumpThingBox {
           UUID = uuid,
