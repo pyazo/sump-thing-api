@@ -68,8 +68,8 @@ namespace SumpThingApi.Controllers
         Email = email
       };
 
-      db.Users.Add(user);
-      db.SaveChanges();
+      db.Users.Add (user);
+      db.SaveChanges ();
 
       Account account = new Account
       {
@@ -77,8 +77,8 @@ namespace SumpThingApi.Controllers
         ResourceId = user.Id
       };
 
-      db.Accounts.Add(account);
-      db.SaveChanges();
+      db.Accounts.Add (account);
+      db.SaveChanges ();
 
       UserAccount userAccount = new UserAccount
         {
@@ -86,8 +86,8 @@ namespace SumpThingApi.Controllers
           AccountId = account.Id
         };
 
-      db.UserAccounts.Add(userAccount);
-      db.SaveChanges();
+      db.UserAccounts.Add (userAccount);
+      db.SaveChanges ();
 
       return db.Users
         .Where (u => u.Id == user.Id)
