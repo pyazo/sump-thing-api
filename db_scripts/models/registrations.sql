@@ -2,7 +2,9 @@ create table registrations
 (
   id serial primary key,
   account_id integer references accounts(id),
-  sump_thing_box_id integer references sump_thing_boxes(id)
+  sump_thing_box_id integer references sump_thing_boxes(id),
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
 );
 
 CREATE TRIGGER set_timestamp

@@ -13,6 +13,10 @@ namespace SumpThingApi.Models
     public DbSet<Account> Accounts { get; set; }
     public DbSet<UserAccount> UserAccounts { get; set; }
 
+    public DbSet<SumpThingBox> SumpThingBoxes { get; set; }
+
+    public DbSet<Registration> Registrations { get; set; }
+
     protected override void OnModelCreating (ModelBuilder modelBuilder)
     {
       base.OnModelCreating (modelBuilder);
@@ -46,6 +50,7 @@ namespace SumpThingApi.Models
         .HasOne (t => t.Account)
         .WithMany (a => a.Tanks)
         .HasForeignKey (t => t.AccountId);
+
     }
   }
 }
